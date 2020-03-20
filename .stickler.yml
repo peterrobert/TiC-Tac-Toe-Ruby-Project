@@ -1,3 +1,4 @@
+rubocop -C false main.rb
 # add the linters you want stickler to use for this project
 linters:
   rubocop:
@@ -10,6 +11,7 @@ files:
     - "Guardfile"
     - "Rakefile"
     - "node_modules/**/*"
+
 # PLEASE DO NOT enable auto fixing options
 # if you need extra support from you linter - do it in your local env as described in README for this config
 # find full documentation here: https://stickler-ci.com/docs
