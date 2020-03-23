@@ -1,28 +1,27 @@
-#!/usr/bin/env ruby
+# !/usr/bin/env ruby
+# rubocop: disable Layout/LineLength
 
- board = ["1","2","3","4","5","6","7","8","9"]
-
-#  Creating the game board
 def game_board(board)
-
-  i = 0;
+  i = 0
   while i < 3
-    print (board[i] + " " + " | ")
+    print (board[i].to_s + ' ' + ' | ')
     i += 1
   end
    puts "\n"
   i = 3
   while i < 6
-    print (board[i] + " " + " | ")
+    print (board[i].to_s + ' ' + ' | ')
     i += 1
   end
   puts "\n"
   i = 6
   while i < 9
-    print (board[i] + " " + " | ")
+    print (board[i].to_s + ' ' + ' | ')
     i += 1
   end
 end
+
+board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 # Game starts
 puts 'Welcome to Tic-Tac-Toe Project!. Created by Peter and Sergio.'
@@ -31,43 +30,43 @@ puts 'Do you want to start the game? (y/n)'
 answer = ''
 while answer != 'y' && answer != 'n'
   answer = gets.chomp
-  puts 'Please, reply with y=YES / n=NO: '  if answer != 'y' && answer != 'n'
-end    
+  puts 'Please, reply with y=YES / n=NO: ' if answer != 'y' && answer != 'n'
+end
 
 if answer == 'y'
-  player_1 = ''  
+  first_player = ''
   puts 'What is the first player\'s name: '
-  while player_1.to_s.strip.length < 1
-    player_1 = gets.chomp
-    puts 'You must type a valid name. What is the first player\'s name: ' if player_1.to_s.strip.length < 1
+  while first_player.to_s.strip.empty?
+    first_player = gets.chomp
+    puts 'You must type a valid name. What is the first player\'s name: ' if first_player.to_s.strip.empty?
   end
-  
-  player_2 = ''
+
+  second_player = ''
   puts 'What is the second player\'s name: '
-  while player_2.to_s.strip.length < 1
-    player_2 = gets.chomp
-    puts 'You must type a valid name. What is the second player\'s name: ' if player_2.to_s.strip.length < 1
+  while second_player.to_s.strip.empty?
+    second_player = gets.chomp
+    puts 'You must type a valid name. What is the second player\'s name: ' if second_player.to_s.strip.empty?
   end
 
-  puts "Hello #{player_1} and #{player_2}, let\'s play..."
+  puts "Hello #{first_player} and #{second_player}, let\'s play..."
 
-  loop do    
-    game_reset = "" 
-    game_board(board) 
-    puts "\n"  
-    puts "enter your value" 
-    t = gets.chomp    # Game Logic here
-    puts "\n"    
-    # game reset
-    puts "The game has ended"
-    puts "Do you want to play again?(y/n)"  
+  loop do
+    game_reset = ''
+    game_board(board)
+    puts "\n"
+    puts 'Enter your value: '
+    t = gets.chomp
+    puts "\n"
 
-    while game_reset != 'y' &&  game_reset != 'n'
+    # Game reset
+    puts 'The game has ended'
+    puts 'Do you want to play again?(y/n)'
+    while game_reset != 'y' && game_reset != 'n'
       game_reset = gets.chomp
-      puts 'Please, reply with y=YES / n=NO: '  if game_reset != 'y' && game_reset != 'n'
-     
+      puts 'Please, reply with y=YES / n=NO: ' if game_reset != 'y' && game_reset != 'n'
     end
   break if game_reset == 'n'
   end
 end
 
+# rubocop: enable Layout/LineLength
