@@ -1,6 +1,10 @@
 #!/usr/bin/env ruby
+
+ board = ["1","2","3","4","5","6","7","8","9"]
+
+#  Creating the game board
 def game_board(board)
-  #board = ["1","2","3","4","5","6","7","8","9"]
+
   i = 0;
   while i < 3
     print (board[i] + " " + " | ")
@@ -20,6 +24,7 @@ def game_board(board)
   end
 end
 
+# Game starts
 puts 'Welcome to Tic-Tac-Toe Project!. Created by Peter and Sergio.'
 puts 'Do you want to start the game? (y/n)'
 
@@ -45,5 +50,17 @@ if answer == 'y'
   end
 
   puts "Hello #{player_1} and #{player_2}, let\'s play..."
+
+  game_board(board)
+
+  # game reset
+  puts "Do you want to play again?(y/n)"
+  game_reset = ""
+
+ while    game_reset != 'y' &&  game_reset != 'n'
+  game_reset = gets.chomp
+  puts 'Please, reply with y=YES / n=NO: '  if game_reset != 'y' && game_reset != 'n'
+
+ end
 end
 
