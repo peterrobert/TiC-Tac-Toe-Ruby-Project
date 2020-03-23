@@ -1,35 +1,37 @@
 # !/usr/bin/env ruby
 # rubocop: disable Layout/LineLength
 
-def print_game_board(game_board)
-  i = 0
-  while i < 3
-    print (game_board[i].to_s + ' ' + ' | ')
-    i += 1
+def print_board(first_player_movements, second_player_movements)
+  board = ""
+  for i in 0..8 do
+    if first_player_movements.any?(i + 1)
+      (i + 1) % 3 > 0 ? board += "X | " : board += "X"
+    elsif second_player_movements.any?(i + 1)
+      (i + 1) % 3 > 0 ? board += "O | " : board += "O"
+    else
+      (i + 1) % 3 > 0 ? board += "  | " : board += " "
+    end
+    board += "\n—————————\n" if (i + 1) % 3 == 0 && i < 8
   end
-   puts "\n"
-  i = 3
-  while i < 6
-    print (game_board[i].to_s + ' ' + ' | ')
-    i += 1
-  end
-  puts "\n"
-  i = 6
-  while i < 9
-    print (game_board[i].to_s + ' ' + ' | ')
-    i += 1
-  end
+  print board
 end
 
-def move(game_board, player, movement)
-  game_board.push(movement)
-  player.push(movement)
+def move(board, player, movement)
+  if movement.is_a?(Integer)
+    if movement >= 1 && movement <= 9
+      board.push(movement)
+      player.push(movement)
+      return true
+    end
+  end
+  false
 end
 
 def game_finished?(game_board)
   return false unless game_board.length == 9
   true
 end
+
 
 # Game starts
 puts 'Welcome to Tic-Tac-Toe Project!. Created by Peter and Sergio.'
@@ -58,28 +60,34 @@ if answer == 'y'
 
   puts "Hello #{first_player} and #{second_player}, let\'s play..."
   
-  loop do
-    game_board = []
+  loop do    
     first_player_moves = []
     second_player_moves = []
 
     game_reset = ''
-    print_game_board(game_board)
+    print_board(game_board)
+    puts "\n"      
 
     i = 0
-    while !game_finished?(game_board)
-      puts "\n"      
+    while !game_finished?(game_board)      
       if i == 0
         puts "Your turn #{first_player}: "
-        t = gets.chomp      
-        move(game_board, first_player_moves, t)
+        t = gets.chomp.to_i
+        while !move(game_board, first_player_moves, t)
+          puts "Please, insert a valid value. Your turn #{first_player}: "
+          t = gets.chomp.to_i
+        end                
         i += 1
       else
         puts "Your turn #{second_player}: "
-        t = gets.chomp      
-        move(game_board, second_player_moves, t)
+        t = gets.chomp.to_i
+        while !move(game_board, second_player_moves, t)
+          puts "Please, insert a valid value. Your turn #{second_player}:"
+          t = gets.chomp.to_i
+        end           
         i -= 1
       end
+      print_board(game_board)
     end
    
     # Game reset
