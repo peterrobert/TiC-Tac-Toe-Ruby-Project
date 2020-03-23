@@ -51,16 +51,22 @@ if answer == 'y'
 
   puts "Hello #{player_1} and #{player_2}, let\'s play..."
 
-  game_board(board)
 
-  # game reset
-  puts "Do you want to play again?(y/n)"
-  game_reset = ""
+  game_reset = ""  
+  t = ''
+  loop do    
+    game_board(board)
 
- while    game_reset != 'y' &&  game_reset != 'n'
-  game_reset = gets.chomp
-  puts 'Please, reply with y=YES / n=NO: '  if game_reset != 'y' && game_reset != 'n'
+    t = gets.chomp    # Game Logic here
 
- end
+    puts "\n"    
+    # game reset
+    puts "Do you want to play again?(y/n)"    
+    while game_reset != 'y' &&  game_reset != 'n'
+      game_reset = gets.chomp
+      puts 'Please, reply with y=YES / n=NO: '  if game_reset != 'y' && game_reset != 'n'
+    end
+  break if game_reset == 'n'
+  end
 end
 
