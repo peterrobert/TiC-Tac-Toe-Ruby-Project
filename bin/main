@@ -1,27 +1,35 @@
 # !/usr/bin/env ruby
 # rubocop: disable Layout/LineLength
 
-def game_board(board)
+def print_game_board(game_board)
   i = 0
   while i < 3
-    print (board[i].to_s + ' ' + ' | ')
+    print (game_board[i].to_s + ' ' + ' | ')
     i += 1
   end
    puts "\n"
   i = 3
   while i < 6
-    print (board[i].to_s + ' ' + ' | ')
+    print (game_board[i].to_s + ' ' + ' | ')
     i += 1
   end
   puts "\n"
   i = 6
   while i < 9
-    print (board[i].to_s + ' ' + ' | ')
+    print (game_board[i].to_s + ' ' + ' | ')
     i += 1
   end
 end
 
-board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+def move(game_board, player, movement)
+  game_board.push(movement)
+  player.push(movement)
+end
+
+def game_finished?(game_board)
+  return false unless game_board.length == 9
+  true
+end
 
 # Game starts
 puts 'Welcome to Tic-Tac-Toe Project!. Created by Peter and Sergio.'
@@ -49,17 +57,33 @@ if answer == 'y'
   end
 
   puts "Hello #{first_player} and #{second_player}, let\'s play..."
-
+  
   loop do
-    game_reset = ''
-    game_board(board)
-    puts "\n"
-    puts 'Enter your value: '
-    t = gets.chomp
-    puts "\n"
+    game_board = []
+    first_player_moves = []
+    second_player_moves = []
 
+    game_reset = ''
+    print_game_board(game_board)
+
+    i = 0
+    while !game_finished?(game_board)
+      puts "\n"      
+      if i == 0
+        puts "Your turn #{first_player}: "
+        t = gets.chomp      
+        move(game_board, first_player_moves, t)
+        i += 1
+      else
+        puts "Your turn #{second_player}: "
+        t = gets.chomp      
+        move(game_board, second_player_moves, t)
+        i -= 1
+      end
+    end
+   
     # Game reset
-    puts 'The game has ended'
+    puts 'The game has ended draw. '
     puts 'Do you want to play again?(y/n)'
     while game_reset != 'y' && game_reset != 'n'
       game_reset = gets.chomp
