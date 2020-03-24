@@ -1,6 +1,6 @@
 # !/usr/bin/env ruby
-# rubocop: disable Layout/LineLength, Metrics/BlockLength, Metrics/CyclomaticComplexity
-# rubocop: disable Metrics/MethodLength, Metrics/PerceivedComplexity, Metrics/BlockNesting
+# rubocop: disable Metrics/BlockLength, Metrics/CyclomaticComplexity
+# rubocop: disable Metrics/PerceivedComplexity, Metrics/BlockNesting
 
 def print_board(first_player, second_player)
   board = ''
@@ -19,6 +19,7 @@ end
 
 def valid_movement?(first_player, second_player, new_movement)
   is_integer = true if Integer(new_movement) rescue false
+
   if is_integer
     if new_movement.to_i >= 1 && new_movement.to_i <= 9
       return first_player.none?(new_movement) && second_player.none?(new_movement)
@@ -127,9 +128,10 @@ if start_game == 'y'
       game_reset = gets.chomp
       puts "\nPlease, reply with y=YES / n=NO: " if game_reset != 'y' && game_reset != 'n'
     end
-  break if game_reset == 'n'
+
+    break if game_reset == 'n'
   end
 end
 
-# rubocop: enable Layout/LineLength, Metrics/BlockLength, Metrics/CyclomaticComplexity
-# rubocop: enable Metrics/MethodLength, Metrics/PerceivedComplexity, Metrics/BlockNesting
+# rubocop: enable Metrics/BlockLength, Metrics/CyclomaticComplexity
+# rubocop: enable Metrics/PerceivedComplexity, Metrics/BlockNesting
