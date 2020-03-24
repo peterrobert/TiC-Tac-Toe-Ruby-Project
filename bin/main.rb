@@ -16,6 +16,10 @@ def print_board(first_player_movements, second_player_movements)
   print board
 end
 
+def isvalid_movement(first_player_movements, second_player_movements, new_movement)
+  first_player_movements.none?(new_movement) && second_player_movements.none?(new_movement)
+end 
+
 def move(board, player, movement)
   if movement.is_a?(Integer)
     if movement >= 1 && movement <= 9
@@ -37,13 +41,13 @@ end
 puts 'Welcome to Tic-Tac-Toe Project!. Created by Peter and Sergio.'
 puts 'Do you want to start the game? (y/n)'
 
-answer = ''
-while answer != 'y' && answer != 'n'
-  answer = gets.chomp
-  puts 'Please, reply with y=YES / n=NO: ' if answer != 'y' && answer != 'n'
+start_game = ''
+while start_game != 'y' && start_game != 'n'
+  start_game = gets.chomp
+  puts 'Please, reply with y=YES / n=NO: ' if start_game != 'y' && start_game != 'n'
 end
 
-if answer == 'y'
+if start_game == 'y'
   first_player = ''
   puts 'What is the first player\'s name: '
   while first_player.to_s.strip.empty?
@@ -61,11 +65,11 @@ if answer == 'y'
   puts "Hello #{first_player} and #{second_player}, let\'s play..."
   
   loop do    
-    first_player_moves = []
-    second_player_moves = []
+    first_player_movements = []
+    second_player_movements = []
 
     game_reset = ''
-    print_board(game_board)
+    print_board(first_player_movements, second_player_movements)
     puts "\n"      
 
     i = 0
@@ -73,7 +77,8 @@ if answer == 'y'
       if i == 0
         puts "Your turn #{first_player}: "
         t = gets.chomp.to_i
-        while !move(game_board, first_player_moves, t)
+        while isvalid_movement(first_player_movements, second_player_movements, t)
+          move(game_board, first_player_movements, t)
           puts "Please, insert a valid value. Your turn #{first_player}: "
           t = gets.chomp.to_i
         end                
@@ -81,13 +86,14 @@ if answer == 'y'
       else
         puts "Your turn #{second_player}: "
         t = gets.chomp.to_i
-        while !move(game_board, second_player_moves, t)
+        while isvalid_movement(first_player_movements, second_player_movements, t)
+          move(game_board, second_player_movements, t)
           puts "Please, insert a valid value. Your turn #{second_player}:"
           t = gets.chomp.to_i
         end           
         i -= 1
       end
-      print_board(game_board)
+      print_board(first_player_movements, second_player_movements)
     end
    
     # Game reset
