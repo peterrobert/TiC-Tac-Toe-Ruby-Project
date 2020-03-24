@@ -18,7 +18,11 @@ def print_board(first_player, second_player)
 end
 
 def valid_movement?(first_player, second_player, new_movement)
-  is_integer = true if Integer(new_movement) rescue false
+  begin
+    is_integer = true if Integer(new_movement)
+  rescue StandardError
+    is_integer = false
+  end
 
   if is_integer
     if new_movement.to_i >= 1 && new_movement.to_i <= 9
