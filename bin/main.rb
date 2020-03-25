@@ -1,24 +1,9 @@
 # !/usr/bin/env ruby
 # rubocop: disable Metrics/BlockLength, Metrics/CyclomaticComplexity
 # rubocop: disable Metrics/PerceivedComplexity, Metrics/BlockNesting
-
 require './lib/player.rb'
 require './lib/board.rb'
-
-def valid_movement?(first_player, second_player, new_movement)
-  begin
-    is_integer = true if Integer(new_movement)
-  rescue StandardError
-    is_integer = false
-  end
-
-  if is_integer
-    if new_movement.to_i >= 1 && new_movement.to_i <= 9
-      return first_player.none?(new_movement) && second_player.none?(new_movement)
-    end
-  end
-  false
-end
+require './lib/game.rb'
 
 def new_movement(player, movement)
   player.push(movement.to_i)
@@ -53,6 +38,9 @@ while start_game != 'y' && start_game != 'n'
 end
 
 if start_game == 'y'
+
+  game = Game.new
+
   player_name = ''
   puts 'What is the first player\'s name?: '
   while player_name.to_s.strip.empty?
@@ -72,7 +60,7 @@ if start_game == 'y'
   puts "\nHello #{first_player.name} and #{second_player.name}, let\'s play..."
 
   board = Board.new
-
+ 
   loop do
     first_player_movements = []
     second_player_movements = []
@@ -88,7 +76,7 @@ if start_game == 'y'
         puts "\nYour turn #{first_player.name}: "
         movement = gets.chomp
 
-        until valid_movement?(first_player_movements, second_player_movements, movement)
+        until game.valid_movement?(first_player_movements, second_player_movements, movement)
           puts "\nPlease, insert a valid value. Your turn #{first_player}: "
           movement = gets.chomp
         end
@@ -99,7 +87,7 @@ if start_game == 'y'
         puts "\nYour turn #{second_player.name}: "
         movement = gets.chomp
 
-        until valid_movement?(first_player_movements, second_player_movements, movement)
+        until game.valid_movement?(first_player_movements, second_player_movements, movement)
           puts "\nPlease, insert a valid value. Your turn #{second_player}:"
           movement = gets.chomp
         end
