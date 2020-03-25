@@ -7,5 +7,7 @@ class Game
     def game_reset
 
     end
+
+    
      
 end
