@@ -9,13 +9,6 @@ def new_movement(player, movement)
   player.push(movement.to_i)
 end
 
-def player_win?(player_movements)
-  # ONLY FOR TEST, IT IS NOT THE FINAL METHOD TO DETECT IF A PLAYER WON
-  return false if player_movements.length < 4
-
-  [true, false].sample
-end
-
 # Game starts
 puts 'Welcome to Tic-Tac-Toe Project!. Created by Peter and Sergio.'
 puts 'Do you want to start the game? (y/n)'

@@ -20,14 +20,21 @@ class Game
       end
 
       def finished?(first_player_movements, second_player_movements)
-        return 1 if player_win?(first_player_movements)
-        return 2 if player_win?(second_player_movements)
+        return 1 if self.player_win?(first_player_movements)
+        return 2 if self.player_win?(second_player_movements)
       
         if first_player_movements.length + second_player_movements.length == 9
           0
         else
           -1
         end
+      end
+
+      def player_win?(player_movements)
+        # ONLY FOR TEST, IT IS NOT THE FINAL METHOD TO DETECT IF A PLAYER WON
+        return false if player_movements.length < 4
+      
+        [true, false].sample
       end
 
     end
