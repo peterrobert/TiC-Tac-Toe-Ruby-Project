@@ -5,10 +5,6 @@ require './lib/player.rb'
 require './lib/board.rb'
 require './lib/game.rb'
 
-def new_movement(player, movement)
-  player.push(movement.to_i)
-end
-
 # Game starts
 puts 'Welcome to Tic-Tac-Toe Project!. Created by Peter and Sergio.'
 puts 'Do you want to start the game? (y/n)'
@@ -59,10 +55,10 @@ if start_game == 'y'
         movement = gets.chomp
 
         until game.valid_movement?(first_player_movements, second_player_movements, movement)
-          puts "\nPlease, insert a valid value. Your turn #{first_player}: "
+          puts "\nPlease, insert a valid value. Your turn #{first_player.name}: "
           movement = gets.chomp
         end
-        new_movement(first_player_movements, movement)
+       game.new_movement(first_player_movements, movement)
 
         i += 1
       else
@@ -70,10 +66,10 @@ if start_game == 'y'
         movement = gets.chomp
 
         until game.valid_movement?(first_player_movements, second_player_movements, movement)
-          puts "\nPlease, insert a valid value. Your turn #{second_player}:"
+          puts "\nPlease, insert a valid value. Your turn #{second_player.name}:"
           movement = gets.chomp
         end
-        new_movement(second_player_movements, movement)
+        game.new_movement(second_player_movements, movement)
 
         i -= 1
       end

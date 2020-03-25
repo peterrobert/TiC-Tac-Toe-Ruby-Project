@@ -37,4 +37,9 @@ class Game
         [true, false].sample
       end
 
+      def new_movement(player, movement)
+        player.push(movement.to_i)
+      end
+      
+
     end
