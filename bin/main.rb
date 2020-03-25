@@ -2,6 +2,8 @@
 # rubocop: disable Metrics/BlockLength, Metrics/CyclomaticComplexity
 # rubocop: disable Metrics/PerceivedComplexity, Metrics/BlockNesting
 
+require './lib/player.rb'
+
 def print_board(first_player, second_player)
   board = ''
   (0..8).each do |i|
@@ -65,21 +67,23 @@ while start_game != 'y' && start_game != 'n'
 end
 
 if start_game == 'y'
-  first_player = ''
+  player_name = ''
   puts 'What is the first player\'s name?: '
-  while first_player.to_s.strip.empty?
-    first_player = gets.chomp
-    puts 'You must type a valid name. What is the first player\'s name?: ' if first_player.to_s.strip.empty?
+  while player_name.to_s.strip.empty?
+    player_name = gets.chomp
+    puts 'You must type a valid name. What is the first player\'s name?: ' if player_name.to_s.strip.empty?
   end
+  first_player = Player.new(player_name)
 
-  second_player = ''
+  player_name = ''
   puts 'What is the second player\'s name?: '
-  while second_player.to_s.strip.empty?
-    second_player = gets.chomp
-    puts 'You must type a valid name. What is the second player\'s name?: ' if second_player.to_s.strip.empty?
+  while player_name.to_s.strip.empty?
+    player_name = gets.chomp
+    puts 'You must type a valid name. What is the second player\'s name?: ' if player_name.to_s.strip.empty?
   end
+  second_player = Player.new(player_name)
 
-  puts "\nHello #{first_player} and #{second_player}, let\'s play..."
+  puts "\nHello #{first_player.name} and #{second_player.name}, let\'s play..."
 
   loop do
     first_player_movements = []
@@ -93,7 +97,7 @@ if start_game == 'y'
     who_won = -1
     while who_won.negative?
       if i.zero?
-        puts "\nYour turn #{first_player}: "
+        puts "\nYour turn #{first_player.name}: "
         movement = gets.chomp
 
         until valid_movement?(first_player_movements, second_player_movements, movement)
@@ -104,7 +108,7 @@ if start_game == 'y'
 
         i += 1
       else
-        puts "\nYour turn #{second_player}: "
+        puts "\nYour turn #{second_player.name}: "
         movement = gets.chomp
 
         until valid_movement?(first_player_movements, second_player_movements, movement)
@@ -120,9 +124,9 @@ if start_game == 'y'
     end
 
     if who_won == 1
-      puts "\nGame Over. The winner is #{first_player}."
+      puts "\nGame Over. The winner is #{first_player.name}."
     elsif who_won == 2
-      puts "\nGame Over. The winner is #{second_player}."
+      puts "\nGame Over. The winner is #{second_player.name}."
     else
       puts "\nGame Over. It is a draw."
     end
