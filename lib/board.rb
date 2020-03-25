@@ -1,7 +1,6 @@
 class Board
     
     def initialize
-
     end
 
     def print(first_player, second_player)
@@ -18,13 +17,4 @@ class Board
         end
         puts board
     end
-
-    def board_movement
-
-    end
-
-    def reset_board
-
-    end
-
 end

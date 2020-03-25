@@ -1,11 +1,10 @@
 # !/usr/bin/env ruby
-# rubocop: disable Metrics/BlockLength, Metrics/CyclomaticComplexity
-# rubocop: disable Metrics/PerceivedComplexity, Metrics/BlockNesting
+# rubocop: disable Metrics/BlockLength
+# rubocop: disable Metrics/BlockNesting
 require './lib/player.rb'
 require './lib/board.rb'
 require './lib/game.rb'
 
-# Game starts
 puts 'Welcome to Tic-Tac-Toe Project!. Created by Peter and Sergio.'
 puts 'Do you want to start the game? (y/n)'
 
@@ -16,7 +15,6 @@ while start_game != 'y' && start_game != 'n'
 end
 
 if start_game == 'y'
-
   game = Game.new
 
   player_name = ''
@@ -38,12 +36,11 @@ if start_game == 'y'
   puts "\nHello #{first_player.name} and #{second_player.name}, let\'s play..."
 
   board = Board.new
- 
   loop do
     first_player.movements = []
     second_player.movements = []
-    
     game_reset = ''
+
     board.print(first_player.movements, second_player.movements)
     puts "\n"
 
@@ -58,7 +55,7 @@ if start_game == 'y'
           puts "\nPlease, insert a valid value. Your turn #{first_player.name}: "
           movement = gets.chomp
         end
-       game.new_movement(first_player.movements, movement)
+        game.new_movement(first_player.movements, movement)
 
         i += 1
       else
@@ -95,5 +92,5 @@ if start_game == 'y'
   end
 end
 
-# rubocop: enable Metrics/BlockLength, Metrics/CyclomaticComplexity
-# rubocop: enable Metrics/PerceivedComplexity, Metrics/BlockNesting
+# rubocop: enable Metrics/BlockLength
+# rubocop: enable Metrics/BlockNesting
