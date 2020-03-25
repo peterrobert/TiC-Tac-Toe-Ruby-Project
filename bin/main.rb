@@ -40,11 +40,11 @@ if start_game == 'y'
   board = Board.new
  
   loop do
-    first_player_movements = []
-    second_player_movements = []
-
+    first_player.movements = []
+    second_player.movements = []
+    
     game_reset = ''
-    board.print(first_player_movements, second_player_movements)
+    board.print(first_player.movements, second_player.movements)
     puts "\n"
 
     i = 0
@@ -54,27 +54,27 @@ if start_game == 'y'
         puts "\nYour turn #{first_player.name}: "
         movement = gets.chomp
 
-        until game.valid_movement?(first_player_movements, second_player_movements, movement)
+        until game.valid_movement?(first_player.movements, second_player.movements, movement)
           puts "\nPlease, insert a valid value. Your turn #{first_player.name}: "
           movement = gets.chomp
         end
-       game.new_movement(first_player_movements, movement)
+       game.new_movement(first_player.movements, movement)
 
         i += 1
       else
         puts "\nYour turn #{second_player.name}: "
         movement = gets.chomp
 
-        until game.valid_movement?(first_player_movements, second_player_movements, movement)
+        until game.valid_movement?(first_player.movements, second_player.movements, movement)
           puts "\nPlease, insert a valid value. Your turn #{second_player.name}:"
           movement = gets.chomp
         end
-        game.new_movement(second_player_movements, movement)
+        game.new_movement(second_player.movements, movement)
 
         i -= 1
       end
-      board.print(first_player_movements, second_player_movements)
-      who_won = game.finished?(first_player_movements, second_player_movements)
+      board.print(first_player.movements, second_player.movements)
+      who_won = game.finished?(first_player.movements, second_player.movements)
     end
 
     if who_won == 1
