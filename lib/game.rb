@@ -18,4 +18,16 @@ class Game
         end
         false
       end
+
+      def finished?(first_player_movements, second_player_movements)
+        return 1 if player_win?(first_player_movements)
+        return 2 if player_win?(second_player_movements)
+      
+        if first_player_movements.length + second_player_movements.length == 9
+          0
+        else
+          -1
+        end
+      end
+
     end

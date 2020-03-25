@@ -16,17 +16,6 @@ def player_win?(player_movements)
   [true, false].sample
 end
 
-def game_finished?(first_player_movements, second_player_movements)
-  return 1 if player_win?(first_player_movements)
-  return 2 if player_win?(second_player_movements)
-
-  if first_player_movements.length + second_player_movements.length == 9
-    0
-  else
-    -1
-  end
-end
-
 # Game starts
 puts 'Welcome to Tic-Tac-Toe Project!. Created by Peter and Sergio.'
 puts 'Do you want to start the game? (y/n)'
@@ -96,7 +85,7 @@ if start_game == 'y'
         i -= 1
       end
       board.print(first_player_movements, second_player_movements)
-      who_won = game_finished?(first_player_movements, second_player_movements)
+      who_won = game.finished?(first_player_movements, second_player_movements)
     end
 
     if who_won == 1
