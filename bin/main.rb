@@ -39,49 +39,43 @@ if start_game == 'y'
   loop do
     first_player.movements = []
     second_player.movements = []
-    game_reset = ''
+    game.reset
 
-    board.print(first_player.movements, second_player.movements)
-    puts "\n"
+    puts "\n" + board.print(first_player.movements, second_player.movements) + "\n"
 
-    i = 0
-    who_won = -1
-    while who_won.negative?
-      if i.zero?
-        puts "\nYour turn #{first_player.name}: "
-        movement = gets.chomp
-
-        until game.valid_movement?(first_player.movements, second_player.movements, movement)
-          puts "\nPlease, insert a valid value. Your turn #{first_player.name}: "
-          movement = gets.chomp
-        end
-        game.new_movement(first_player.movements, movement)
-
-        i += 1
-      else
+    until game.finished?(first_player.movements, second_player.movements)
+      if game.switch_player
         puts "\nYour turn #{second_player.name}: "
         movement = gets.chomp
 
         until game.valid_movement?(first_player.movements, second_player.movements, movement)
-          puts "\nPlease, insert a valid value. Your turn #{second_player.name}:"
+          puts "\nPlease, insert a valid slot. Your turn #{second_player.name}: "
           movement = gets.chomp
         end
-        game.new_movement(second_player.movements, movement)
+        game.new_movement(second_player.movements, movement.to_i)
+      else
+        puts "\nYour turn #{first_player.name}: "
+        movement = gets.chomp
 
-        i -= 1
+        until game.valid_movement?(first_player.movements, second_player.movements, movement)
+          puts "\nPlease, insert a valid slot. Your turn #{first_player.name}: "
+          movement = gets.chomp
+        end
+        game.new_movement(first_player.movements, movement.to_i)
       end
-      board.print(first_player.movements, second_player.movements)
-      who_won = game.finished?(first_player.movements, second_player.movements)
+
+      puts "\n" + board.print(first_player.movements, second_player.movements)
     end
 
-    if who_won == 1
+    if game.who_won == 1
       puts "\nGame Over. The winner is #{first_player.name}."
-    elsif who_won == 2
+    elsif game.who_won == 2
       puts "\nGame Over. The winner is #{second_player.name}."
     else
       puts "\nGame Over. It is a draw."
     end
 
+    game_reset = ''
     puts "\nDo you want to play again?(y/n)"
     while game_reset != 'y' && game_reset != 'n'
       game_reset = gets.chomp

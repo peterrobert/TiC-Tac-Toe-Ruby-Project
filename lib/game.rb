@@ -1,6 +1,13 @@
 # rubocop: disable Metrics/CyclomaticComplexity
 class Game
+  attr_reader :switch_player
+  attr_reader :who_won
+
   WINNING_COMBINATIONS = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]].freeze
+
+  def initialize
+    reset
+  end
 
   def valid_movement?(first_player, second_player, new_movement)
     begin
@@ -18,14 +25,19 @@ class Game
   end
 
   def finished?(first_player_movements, second_player_movements)
-    return 1 if player_win?(first_player_movements)
-    return 2 if player_win?(second_player_movements)
-
-    if first_player_movements.length + second_player_movements.length == 9
-      0
+    if player_win?(first_player_movements)
+      @who_won = 1
+      return true
+    elsif player_win?(second_player_movements)
+      @who_won = 2
+      return true
+    elsif first_player_movements.length + second_player_movements.length == 9
+      @who_won = 0
+      return true
     else
-      -1
+      @who_won = -1
     end
+    false
   end
 
   def player_win?(player_movements)
@@ -39,7 +51,13 @@ class Game
   end
 
   def new_movement(player, movement)
-    player.push(movement.to_i)
+    player.push(movement)
+    @switch_player = !@switch_player
+  end
+
+  def reset()
+    @switch_player = false
+    @who_won = -1
   end
 end
 

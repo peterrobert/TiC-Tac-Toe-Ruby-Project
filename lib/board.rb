@@ -13,7 +13,7 @@ class Board
                end
       board += "\n—————————\n" if ((i + 1) % 3).zero? && i < 8
     end
-    puts board
+    board
   end
 end
 
