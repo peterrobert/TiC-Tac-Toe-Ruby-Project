@@ -1,60 +1,9 @@
 # !/usr/bin/env ruby
-# rubocop: disable Metrics/BlockLength, Metrics/CyclomaticComplexity
-# rubocop: disable Metrics/PerceivedComplexity, Metrics/BlockNesting
 
-def print_board(first_player, second_player)
-  board = ''
-  (0..8).each do |i|
-    board += if first_player.any?(i + 1)
-               ((i + 1) % 3).positive? ? 'X | ' : 'X'
-             elsif second_player.any?(i + 1)
-               ((i + 1) % 3).positive? ? 'O | ' : 'O'
-             else
-               ((i + 1) % 3).positive? ? '  | ' : ' '
-             end
-    board += "\n—————————\n" if ((i + 1) % 3).zero? && i < 8
-  end
-  puts board
-end
+require_relative '../lib/player.rb'
+require_relative '../lib/board.rb'
+require_relative '../lib/game.rb'
 
-def valid_movement?(first_player, second_player, new_movement)
-  begin
-    is_integer = true if Integer(new_movement)
-  rescue StandardError
-    is_integer = false
-  end
-
-  if is_integer
-    if new_movement.to_i >= 1 && new_movement.to_i <= 9
-      return first_player.none?(new_movement) && second_player.none?(new_movement)
-    end
-  end
-  false
-end
-
-def new_movement(player, movement)
-  player.push(movement.to_i)
-end
-
-def player_win?(player_movements)
-  # ONLY FOR TEST, IT IS NOT THE FINAL METHOD TO DETECT IF A PLAYER WON
-  return false if player_movements.length < 4
-
-  [true, false].sample
-end
-
-def game_finished?(first_player_movements, second_player_movements)
-  return 1 if player_win?(first_player_movements)
-  return 2 if player_win?(second_player_movements)
-
-  if first_player_movements.length + second_player_movements.length == 9
-    0
-  else
-    -1
-  end
-end
-
-# Game starts
 puts 'Welcome to Tic-Tac-Toe Project!. Created by Peter and Sergio.'
 puts 'Do you want to start the game? (y/n)'
 
@@ -65,68 +14,60 @@ while start_game != 'y' && start_game != 'n'
 end
 
 if start_game == 'y'
-  first_player = ''
+  game = Game.new
+
+  player_name = ''
   puts 'What is the first player\'s name?: '
-  while first_player.to_s.strip.empty?
-    first_player = gets.chomp
-    puts 'You must type a valid name. What is the first player\'s name?: ' if first_player.to_s.strip.empty?
+  while player_name.to_s.strip.empty?
+    player_name = gets.chomp
+    puts 'You must type a valid name. What is the first player\'s name?: ' if player_name.to_s.strip.empty?
   end
+  first_player = Player.new(player_name)
 
-  second_player = ''
+  player_name = ''
   puts 'What is the second player\'s name?: '
-  while second_player.to_s.strip.empty?
-    second_player = gets.chomp
-    puts 'You must type a valid name. What is the second player\'s name?: ' if second_player.to_s.strip.empty?
+  while player_name.to_s.strip.empty?
+    player_name = gets.chomp
+    puts 'You must type a valid name. What is the second player\'s name?: ' if player_name.to_s.strip.empty?
   end
+  second_player = Player.new(player_name)
 
-  puts "\nHello #{first_player} and #{second_player}, let\'s play..."
+  puts "\nHello #{first_player.name} and #{second_player.name}, let\'s play..."
 
+  board = Board.new
   loop do
-    first_player_movements = []
-    second_player_movements = []
+    first_player.movements = []
+    second_player.movements = []
+    game.reset
 
-    game_reset = ''
-    print_board(first_player_movements, second_player_movements)
-    puts "\n"
+    puts "\n" + board.print(first_player.movements, second_player.movements) + "\n"
 
-    i = 0
-    who_won = -1
-    while who_won.negative?
-      if i.zero?
-        puts "\nYour turn #{first_player}: "
+    player_turn = first_player
+    until game.finished?(first_player.movements, second_player.movements)
+
+      puts "\nYour turn #{player_turn.name}: "
+      movement = gets.chomp
+
+      until game.valid_movement?(first_player.movements, second_player.movements, movement)
+        puts "\nPlease, insert a valid slot. Your turn #{player_turn.name}: "
         movement = gets.chomp
-
-        until valid_movement?(first_player_movements, second_player_movements, movement)
-          puts "\nPlease, insert a valid value. Your turn #{first_player}: "
-          movement = gets.chomp
-        end
-        new_movement(first_player_movements, movement)
-
-        i += 1
-      else
-        puts "\nYour turn #{second_player}: "
-        movement = gets.chomp
-
-        until valid_movement?(first_player_movements, second_player_movements, movement)
-          puts "\nPlease, insert a valid value. Your turn #{second_player}:"
-          movement = gets.chomp
-        end
-        new_movement(second_player_movements, movement)
-
-        i -= 1
       end
-      print_board(first_player_movements, second_player_movements)
-      who_won = game_finished?(first_player_movements, second_player_movements)
+
+      game.new_movement(player_turn.movements, movement.to_i)
+      player_turn = game.switch_player ? second_player : first_player
+
+      puts "\n" + board.print(first_player.movements, second_player.movements)
     end
 
-    if who_won == 1
-      puts "\nGame Over. The winner is #{first_player}."
-    elsif who_won == 2
-      puts "\nGame Over. The winner is #{second_player}."
+    if game.who_won == 1
+      puts "\nGame Over. The winner is #{first_player.name}."
+    elsif game.who_won == 2
+      puts "\nGame Over. The winner is #{second_player.name}."
     else
       puts "\nGame Over. It is a draw."
     end
 
+    game_reset = ''
     puts "\nDo you want to play again?(y/n)"
     while game_reset != 'y' && game_reset != 'n'
       game_reset = gets.chomp
@@ -136,6 +77,3 @@ if start_game == 'y'
     break if game_reset == 'n'
   end
 end
-
-# rubocop: enable Metrics/BlockLength, Metrics/CyclomaticComplexity
-# rubocop: enable Metrics/PerceivedComplexity, Metrics/BlockNesting
