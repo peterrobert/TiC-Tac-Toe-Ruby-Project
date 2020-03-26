@@ -17,8 +17,8 @@ class Game
     end
 
     if is_integer
-      if new_movement.to_i >= 1 && new_movement.to_i <= 9
-        return first_player.none?(new_movement) && second_player.none?(new_movement)
+      if new_movement.to_i >= 1 && new_movement.to_i <= 9    
+        return first_player.none?(new_movement.to_i) && second_player.none?(new_movement.to_i)
       end
     end
     false
@@ -62,3 +62,10 @@ class Game
 end
 
 # rubocop: enable Metrics/CyclomaticComplexity
+=begin
+game = Game.new
+a = [1]
+b = []
+
+p game.valid_movement?(a, b, 1)
+=end
