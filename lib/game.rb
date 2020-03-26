@@ -1,6 +1,7 @@
 # rubocop: disable Metrics/CyclomaticComplexity
-
 class Game
+  WINNING_COMBINATIONS = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]].freeze
+
   def valid_movement?(first_player, second_player, new_movement)
     begin
       is_integer = true if Integer(new_movement)
@@ -28,10 +29,13 @@ class Game
   end
 
   def player_win?(player_movements)
-    # ONLY FOR TEST, IT IS NOT THE FINAL METHOD TO DETECT IF A PLAYER WON
-    return false if player_movements.length < 4
+    return false unless player_movements.length >= 3
 
-    [true, false].sample
+    WINNING_COMBINATIONS.each do |combination|
+      return true if (combination - player_movements).empty?
+    end
+
+    false
   end
 
   def new_movement(player, movement)
