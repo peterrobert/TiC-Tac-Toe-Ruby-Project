@@ -1,8 +1,8 @@
 # !/usr/bin/env ruby
 
-require './lib/player.rb'
-require './lib/board.rb'
-require './lib/game.rb'
+require_relative '../lib/player.rb'
+require_relative '../lib/board.rb'
+require_relative '../lib/game.rb'
 
 puts 'Welcome to Tic-Tac-Toe Project!. Created by Peter and Sergio.'
 puts 'Do you want to start the game? (y/n)'
