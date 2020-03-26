@@ -1,6 +1,5 @@
 # !/usr/bin/env ruby
-# rubocop: disable Metrics/BlockLength
-# rubocop: disable Metrics/BlockNesting
+
 require './lib/player.rb'
 require './lib/board.rb'
 require './lib/game.rb'
@@ -53,7 +52,7 @@ if start_game == 'y'
         puts "\nPlease, insert a valid slot. Your turn #{player_turn.name}: "
         movement = gets.chomp
       end
-      
+
       game.new_movement(player_turn.movements, movement.to_i)
       player_turn = game.switch_player ? second_player : first_player
 
@@ -78,6 +77,3 @@ if start_game == 'y'
     break if game_reset == 'n'
   end
 end
-
-# rubocop: enable Metrics/BlockLength
-# rubocop: enable Metrics/BlockNesting
