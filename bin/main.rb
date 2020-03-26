@@ -43,26 +43,19 @@ if start_game == 'y'
 
     puts "\n" + board.print(first_player.movements, second_player.movements) + "\n"
 
+    player_turn = first_player
     until game.finished?(first_player.movements, second_player.movements)
-      if game.switch_player
-        puts "\nYour turn #{second_player.name}: "
-        movement = gets.chomp
 
-        until game.valid_movement?(first_player.movements, second_player.movements, movement)
-          puts "\nPlease, insert a valid slot. Your turn #{second_player.name}: "
-          movement = gets.chomp
-        end
-        game.new_movement(second_player.movements, movement.to_i)
-      else
-        puts "\nYour turn #{first_player.name}: "
-        movement = gets.chomp
+      puts "\nYour turn #{player_turn.name}: "
+      movement = gets.chomp
 
-        until game.valid_movement?(first_player.movements, second_player.movements, movement)
-          puts "\nPlease, insert a valid slot. Your turn #{first_player.name}: "
-          movement = gets.chomp
-        end
-        game.new_movement(first_player.movements, movement.to_i)
+      until game.valid_movement?(first_player.movements, second_player.movements, movement)
+        puts "\nPlease, insert a valid slot. Your turn #{player_turn.name}: "
+        movement = gets.chomp
       end
+      
+      game.new_movement(player_turn.movements, movement.to_i)
+      player_turn = game.switch_player ? second_player : first_player
 
       puts "\n" + board.print(first_player.movements, second_player.movements)
     end
