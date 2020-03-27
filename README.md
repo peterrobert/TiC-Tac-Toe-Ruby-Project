@@ -40,7 +40,7 @@
   - _ | _ | _
   - _ | _ | _
 
-Note: The goal is to be the first to place pieces in the orders mentioned, below shows how player two wins
+ Note: The goal is to be the first to place pieces in the orders mentioned, below shows how player two wins
 
   - X | O | X
   - X | O | _
@@ -48,9 +48,9 @@ Note: The goal is to be the first to place pieces in the orders mentioned, below
 
 - The game prompts for a response of whether you wish to continue or not once there is a win or draw. The game exits if user wants to quit or viceversa if yes is selected
 
-![Demo](https://user-images.githubusercontent.com/36812672/77720794-f007de80-6fb6-11ea-86f6-49410669b791.gif)
+ ![Demo](https://user-images.githubusercontent.com/36812672/77720794-f007de80-6fb6-11ea-86f6-49410669b791.gif)
 
-![Board](https://user-images.githubusercontent.com/36812672/77721727-acfb3a80-6fb9-11ea-93bf-6a779ffd52c4.png)
+ ![Board](https://user-images.githubusercontent.com/36812672/77721727-acfb3a80-6fb9-11ea-93bf-6a779ffd52c4.png)
 
 ## Authors  ![Hireable](https://img.shields.io/badge/HIREABLE-YES-yellowgreen&?style=for-the-badge)
 
