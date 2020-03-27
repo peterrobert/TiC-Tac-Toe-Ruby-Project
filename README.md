@@ -1,5 +1,8 @@
 # Tic-Tac-Toe with Ruby
 
+ > Building a tic-tac-toe game that can be played on the command line(windows) / terminal(mac &amp; linux) where two human players can play against each other and the board is displayed in between turns.
+
+ > Full task description [here](https://www.theodinproject.com/courses/ruby-programming/lessons/oop)
 
 ## Built With
 
