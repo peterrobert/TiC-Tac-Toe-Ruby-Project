@@ -11,22 +11,22 @@
 - Install Ruby in your system. To install Ruby, you can read the [Documentation](https://www.ruby-lang.org/en/documentation/installation/)
 - Download it as a [Zip File](https://github.com/peterrobert/TiC-Tac-Toe-Ruby-Project/archive/fourth-milestone.zip). If you have installed Git in your system, you can clone it using **git clone** command.
 - For Windows users, open Command Prompt and run:
-
     ```console
     C:\>cd Tic-Tac-Toe-folder
     C:\Tic-Tac-Toe-folder>ruby bin/main.rb
     ```
-
 - For Linux and Mac users, open a Terminal and run:
-
     ```console
     $ cd Tic-Tac-Toe-folder
     $ ruby ./bin/main.rb
     ``` 
+- Enjoy!
 
 ## How to Play
 
+![Demo](https://user-images.githubusercontent.com/36812672/77720794-f007de80-6fb6-11ea-86f6-49410669b791.gif)
 
+![Board](https://user-images.githubusercontent.com/36812672/77721727-acfb3a80-6fb9-11ea-93bf-6a779ffd52c4.png)
 
 ## Authors
 
