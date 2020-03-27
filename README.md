@@ -52,7 +52,7 @@ Note: The goal is to be the first to place pieces in the orders mentioned, below
 
 ![Board](https://user-images.githubusercontent.com/36812672/77721727-acfb3a80-6fb9-11ea-93bf-6a779ffd52c4.png)
 
-## Authors
+## Authors  ![Hireable](https://img.shields.io/badge/HIREABLE-YES-yellowgreen&?style=for-the-badge)
 
 👤 **Peter Robert**
 
