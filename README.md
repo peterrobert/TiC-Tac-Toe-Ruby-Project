@@ -42,9 +42,9 @@
 
  Note: The goal is to be the first to place pieces in the orders mentioned, below shows how player two wins
 
-  - X | O | X
-  - X | O | _
-  - _ | O | X
+ - X | O | X
+ - X | O | _
+ - _ | O | X
 
 - The game prompts for a response of whether you wish to continue or not once there is a win or draw. The game exits if user wants to quit or viceversa if yes is selected
 
