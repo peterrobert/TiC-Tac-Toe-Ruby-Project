@@ -37,8 +37,8 @@
  Navigate into the spec folder and run the following at the console:
 
    ```console
-    rspec tests.rb
-    ```
+   rspec tests.rb
+   ```
 
 ## How to Play
 
