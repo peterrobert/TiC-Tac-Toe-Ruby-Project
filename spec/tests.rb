@@ -11,7 +11,7 @@ RSpec.describe Game do
 
     it 'returns true if it recieves a number between 1 and 9 and this number must be unique in first player and second player movements' do
       expect(game.valid_movement?([], [], -1)).not_to eql(true)
-    end    
+    end
 
     it 'returns true if it recieves a number between 1 and 9 and this number must be unique in first player and second player movements' do
       expect(game.valid_movement?([3], [5], 9)).to eql(true)
@@ -19,7 +19,7 @@ RSpec.describe Game do
 
     it 'returns true if it recieves a number between 1 and 9 and this number must be unique in first player and second player movements' do
       expect(game.valid_movement?([3], [5], 3)).not_to eql(true)
-    end    
+    end
 
     it 'returns true if it recieves a number between 1 and 9 and this number must be unique in first player and second player movements' do
       expect(game.valid_movement?([9], [1, 2], 9)).to eql(false)
@@ -35,7 +35,7 @@ RSpec.describe Game do
 
     it 'returns true if it recieves a number between 1 and 9 and this number must be unique in first player and second player movements' do
       expect(game.valid_movement?([], [], 0)).not_to eql(true)
-    end    
+    end
 
     it 'returns true if it recieves a number between 1 and 9 and this number must be unique in first player and second player movements' do
       expect(game.valid_movement?([9], [1, 2], 'd')).to eql(false)
@@ -43,7 +43,7 @@ RSpec.describe Game do
 
     it 'returns true if it recieves a number between 1 and 9 and this number must be unique in first player and second player movements' do
       expect(game.valid_movement?([9], [1, 2], 't')).not_to eql(true)
-    end    
+    end
   end
 
   describe '#player_win?' do
@@ -53,7 +53,15 @@ RSpec.describe Game do
     end
 
     it 'returns TRUE if the passed array has a WINNING_COMBINATION' do
+      expect(game.player_win?([])).not_to eql(true)
+    end
+
+    it 'returns TRUE if the passed array has a WINNING_COMBINATION' do
       expect(game.player_win?([1, 2, 3])).to eql(true)
+    end
+
+    it 'returns TRUE if the passed array has a WINNING_COMBINATION' do
+      expect(game.player_win?([1, 2, 3])).not_to eql(false)
     end
 
     it 'returns TRUE if the passed array has a WINNING_COMBINATION' do
@@ -61,7 +69,15 @@ RSpec.describe Game do
     end
 
     it 'returns TRUE if the passed array has a WINNING_COMBINATION' do
+      expect(game.player_win?([1, 2, 4, 9])).not_to eql(true)
+    end
+
+    it 'returns TRUE if the passed array has a WINNING_COMBINATION' do
       expect(game.player_win?([2, 3, 4, 1])).to eql(true)
+    end
+
+    it 'returns TRUE if the passed array has a WINNING_COMBINATION' do
+      expect(game.player_win?([2, 3, 4, 1])).not_to eql(false)
     end
   end
 
