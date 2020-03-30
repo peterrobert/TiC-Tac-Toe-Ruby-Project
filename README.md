@@ -25,6 +25,21 @@
     ``` 
 - Enjoy!
 
+## How to Test the Methods In the Classes
+
+ Install Rspec gem in your system. To do this:
+
+ Open Command Prompt or Terminal and run:
+
+    ```console
+    gem install Rspec
+    ```
+ Navigate into the spec folder and run the following at the console:
+
+   ```console
+    rspec tests.rb
+    ```
+
 ## How to Play
 
 - Begin by executing the file main.rb inside the repositories /bin folder.
