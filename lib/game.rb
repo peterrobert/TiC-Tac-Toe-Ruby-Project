@@ -53,6 +53,8 @@ class Game
   def new_movement(player, movement)
     player.push(movement)
     @switch_player = !@switch_player
+
+    player
   end
 
   def reset()
