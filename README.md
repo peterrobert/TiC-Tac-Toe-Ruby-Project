@@ -31,9 +31,10 @@
 
  Open Command Prompt or Terminal and run:
 
-    ```console
-    gem install Rspec
-    ```
+  ```console
+  gem install Rspec
+  ```
+
  Navigate into the spec folder and run the following at the console:
 
    ```console
