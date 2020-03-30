@@ -67,6 +67,21 @@ RSpec.describe Game do
       expect(game.finished?([1, 3, 5, 8, 9], [2, 4, 6, 7])).to eql(true)
     end
   end
+
+  describe '#new_movement' do
+    let(:game) { Game.new }
+    it 'returns a new array with the new movement' do
+      expect(game.new_movement([], 3)).to eql([3])
+    end
+
+    it 'returns a new array with the new movement' do
+      expect(game.new_movement([1, 2], 3)).to eql([1, 2, 3])
+    end
+
+    it 'returns a new array with the new movement' do
+      expect(game.new_movement([4, 9], 2)).to eql([4, 9, 2])
+    end
+  end
 end
 
 # rubocop: enable Layout/LineLength
