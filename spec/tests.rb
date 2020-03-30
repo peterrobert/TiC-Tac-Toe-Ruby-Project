@@ -10,11 +10,23 @@ RSpec.describe Game do
     end
 
     it 'returns true if it recieves a number between 1 and 9 and this number must be unique in first player and second player movements' do
+      expect(game.valid_movement?([], [], -1)).not_to eql(true)
+    end    
+
+    it 'returns true if it recieves a number between 1 and 9 and this number must be unique in first player and second player movements' do
       expect(game.valid_movement?([3], [5], 9)).to eql(true)
     end
 
     it 'returns true if it recieves a number between 1 and 9 and this number must be unique in first player and second player movements' do
+      expect(game.valid_movement?([3], [5], 3)).not_to eql(true)
+    end    
+
+    it 'returns true if it recieves a number between 1 and 9 and this number must be unique in first player and second player movements' do
       expect(game.valid_movement?([9], [1, 2], 9)).to eql(false)
+    end
+
+    it 'returns true if it recieves a number between 1 and 9 and this number must be unique in first player and second player movements' do
+      expect(game.valid_movement?([9], [1, 2], 1)).not_to eql(true)
     end
 
     it 'returns true if it recieves a number between 1 and 9 and this number must be unique in first player and second player movements' do
@@ -22,8 +34,16 @@ RSpec.describe Game do
     end
 
     it 'returns true if it recieves a number between 1 and 9 and this number must be unique in first player and second player movements' do
+      expect(game.valid_movement?([], [], 0)).not_to eql(true)
+    end    
+
+    it 'returns true if it recieves a number between 1 and 9 and this number must be unique in first player and second player movements' do
       expect(game.valid_movement?([9], [1, 2], 'd')).to eql(false)
     end
+
+    it 'returns true if it recieves a number between 1 and 9 and this number must be unique in first player and second player movements' do
+      expect(game.valid_movement?([9], [1, 2], 't')).not_to eql(true)
+    end    
   end
 
   describe '#player_win?' do
