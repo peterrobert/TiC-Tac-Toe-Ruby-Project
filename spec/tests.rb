@@ -26,6 +26,25 @@ RSpec.describe Game do
     end
   end
 
+  describe '#player_win?' do
+    let(:game) { Game.new }
+    it 'returns TRUE if the passed array has a WINNING_COMBINATION' do
+      expect(game.player_win?([])).to eql(false)
+    end
+
+    it 'returns TRUE if the passed array has a WINNING_COMBINATION' do
+      expect(game.player_win?([1, 2, 3])).to eql(true)
+    end
+
+    it 'returns TRUE if the passed array has a WINNING_COMBINATION' do
+      expect(game.player_win?([1, 2, 4, 9])).to eql(false)
+    end
+
+    it 'returns TRUE if the passed array has a WINNING_COMBINATION' do
+      expect(game.player_win?([2, 3, 4, 1])).to eql(true)
+    end
+  end
+
   describe '#finished?' do
     let(:game) { Game.new }
     it 'returns TRUE if there is a winner and FALSE if the game is not finished' do
