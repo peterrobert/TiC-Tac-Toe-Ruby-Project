@@ -25,6 +25,29 @@ RSpec.describe Game do
       expect(game.valid_movement?([9], [1, 2], 'd')).to eql(false)
     end
   end
+
+  describe '#finished?' do
+    let(:game) { Game.new }
+    it 'returns TRUE if there is a winner and FALSE if the game is not finished' do
+      expect(game.finished?([], [])).to eql(false)
+    end
+
+    it 'returns TRUE if there is a winner and FALSE if the game is not finished' do
+      expect(game.finished?([1, 2, 3], [4, 5])).to eql(true)
+    end
+
+    it 'returns TRUE if there is a winner and FALSE if the game is not finished' do
+      expect(game.finished?([1, 2], [5, 4, 6])).to eql(true)
+    end
+
+    it 'returns TRUE if there is a winner and FALSE if the game is not finished' do
+      expect(game.finished?([1, 2, 4], [8, 5, 9])).to eql(false)
+    end
+
+    it 'returns TRUE if there is a winner and FALSE if the game is not finished' do
+      expect(game.finished?([1, 3, 5, 8, 9], [2, 4, 6, 7])).to eql(true)
+    end
+  end
 end
 
 # rubocop: enable Layout/LineLength
